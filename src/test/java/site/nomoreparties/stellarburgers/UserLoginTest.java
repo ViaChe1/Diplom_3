@@ -19,12 +19,10 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 
 public class UserLoginTest {
-
-    SoftAssertions softAssertions = new SoftAssertions();
-    UserClient userClient = new UserClient();
-    User user;
-    String bearerToken;
-
+    private SoftAssertions softAssertions = new SoftAssertions();
+    private UserClient userClient = new UserClient();
+    private User user;
+    private String bearerToken;
     @Before
     public void setUp() {
         // для запуска в Я.браузере
@@ -41,14 +39,12 @@ public class UserLoginTest {
         // Сохраняем его токен
         bearerToken = userRegister.extract().body().path("accessToken");
     }
-
     @After
     public void tearDown() {
         closeWebDriver();
         // Удаляем созданного для теста пользователя
         userClient.delete(bearerToken);
     }
-
     @DisplayName("Логин по кнопке Войти в аккаунт на главной")
     @Description("Проверяем, что попадаем на страницу логина по кнопке Войти в аккаунт на главной странице и можно" +
             "успешно залогиниться")
@@ -57,11 +53,9 @@ public class UserLoginTest {
         HomePage homePage = open(HomePage.URL, HomePage.class);
         LoginPage loginPage = homePage.clickEnterInAccountButton();
         homePage = loginPage.makeUserLogin(user.getEmail(), user.getPassword());
-
         softAssertions.assertThat(homePage.isVisibleCreateOrderButton()).isTrue();
         softAssertions.assertAll();
     }
-
     @DisplayName("Логин через кнопку Личный кабинет")
     @Description("Проверяем, что попадаем на страницу логина через кнопку Личный кабинет в хедере и можно" +
             "успешно залогиниться")
@@ -70,7 +64,6 @@ public class UserLoginTest {
         HomePage homePage = open(HomePage.URL, HomePage.class);
         LoginPage loginPage = homePage.clickPersonalAreaButtonBeforeLogin();
         homePage = loginPage.makeUserLogin(user.getEmail(), user.getPassword());
-
         softAssertions.assertThat(homePage.isVisibleCreateOrderButton()).isTrue();
         softAssertions.assertAll();
     }
@@ -83,7 +76,6 @@ public class UserLoginTest {
         RegisterPage registerPage = open(RegisterPage.URL, RegisterPage.class);
         LoginPage loginPage = registerPage.clickLinkButtonLogin();
         HomePage homePage = loginPage.makeUserLogin(user.getEmail(), user.getPassword());
-
         softAssertions.assertThat(homePage.isVisibleCreateOrderButton()).isTrue();
         softAssertions.assertAll();
     }
@@ -96,7 +88,6 @@ public class UserLoginTest {
         ForgotPassword forgotPassword = open(ForgotPassword.URL, ForgotPassword.class);
         LoginPage loginPage = forgotPassword.clickLinkButtonLogin();
         HomePage homePage = loginPage.makeUserLogin(user.getEmail(), user.getPassword());
-
         softAssertions.assertThat(homePage.isVisibleCreateOrderButton()).isTrue();
         softAssertions.assertAll();
     }

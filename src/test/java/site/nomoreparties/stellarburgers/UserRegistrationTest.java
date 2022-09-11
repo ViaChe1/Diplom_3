@@ -17,10 +17,8 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 
 public class UserRegistrationTest {
-
-    SoftAssertions softAssertions = new SoftAssertions();
-    User user;
-
+    private SoftAssertions softAssertions = new SoftAssertions();
+    private User user;
     @Before
     public void setUp() {
         // для запуска в Я.браузере
@@ -29,17 +27,14 @@ public class UserRegistrationTest {
 //        options.setBinary("C:\\Users\\vorku\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
 //        WebDriver driver = new ChromeDriver(options);
 //        WebDriverRunner.setWebDriver(driver);
-
         // Создаем юзера для регистрации
         user = UserGenerator.getRandomUser();
     }
-
     @After
     public void tearDown() {
         closeWebDriver();
         UserClient userClient = new UserClient();
         ValidatableResponse userLogin = userClient.login(user);
-
         // Логинимся под пользователем, если успешно, то значит регистрация была, получаем токен и удаляем его
         if (userLogin.extract().body().path("success")) {
             userClient.delete(userLogin.extract().body().path("accessToken"));
@@ -52,12 +47,10 @@ public class UserRegistrationTest {
     public void shouldSuccessRegistration() {
         RegisterPage registerPage = open(RegisterPage.URL, RegisterPage.class);
         LoginPage loginPage = registerPage.makeUserRegistration(user.getName(), user.getEmail(), user.getPassword());
-
         softAssertions.assertThat(loginPage.isVisibleEnterText()).isTrue();
         softAssertions.assertThat(loginPage.isVisibleEnterButton()).isTrue();
         softAssertions.assertAll();
     }
-
     @DisplayName("Короткий пароль")
     @Description("Проверяем, что появится алерт, если введён пароль короче 6 символов")
     @Test
@@ -68,7 +61,6 @@ public class UserRegistrationTest {
         // пароль обрежем до 5 символов
         registerPage.setPassword(user.getPassword().substring(0,5));
         registerPage.clickRegistrationButton();
-
         softAssertions.assertThat(registerPage.isVisibleTextWrongPassword()).isTrue();
         softAssertions.assertAll();
     }
