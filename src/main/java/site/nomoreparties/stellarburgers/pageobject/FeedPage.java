@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Condition.visible;
 
-public class FeedPage extends BasePage{
+public class FeedPage extends BasePage {
 
     public static final String URL = "https://stellarburgers.nomoreparties.site/feed";
 

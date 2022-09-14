@@ -8,7 +8,7 @@ import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
-public class AccountProfilePage extends BasePage{
+public class AccountProfilePage extends BasePage {
 
     public static final String URL = "https://stellarburgers.nomoreparties.site/account/profile";
 

@@ -19,6 +19,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class UserRegistrationTest {
     private SoftAssertions softAssertions = new SoftAssertions();
     private User user;
+
     @Before
     public void setUp() {
         // для запуска в Я.браузере
@@ -30,6 +31,7 @@ public class UserRegistrationTest {
         // Создаем юзера для регистрации
         user = UserGenerator.getRandomUser();
     }
+
     @After
     public void tearDown() {
         closeWebDriver();
@@ -51,6 +53,7 @@ public class UserRegistrationTest {
         softAssertions.assertThat(loginPage.isVisibleEnterButton()).isTrue();
         softAssertions.assertAll();
     }
+
     @DisplayName("Короткий пароль")
     @Description("Проверяем, что появится алерт, если введён пароль короче 6 символов")
     @Test
@@ -59,7 +62,7 @@ public class UserRegistrationTest {
         registerPage.setName(user.getName());
         registerPage.setEmail(user.getEmail());
         // пароль обрежем до 5 символов
-        registerPage.setPassword(user.getPassword().substring(0,5));
+        registerPage.setPassword(user.getPassword().substring(0, 5));
         registerPage.clickRegistrationButton();
         softAssertions.assertThat(registerPage.isVisibleTextWrongPassword()).isTrue();
         softAssertions.assertAll();

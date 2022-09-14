@@ -13,7 +13,7 @@ public class BasePage {
      * Класс для для базовых элементов, которые присутствуют на всех страницах, хедеры, футеры, банеры...
      */
 
-    public String getCurrentUrl(){
+    public String getCurrentUrl() {
         // получаем текущий УРЛ, что в адресной строке
         return WebDriverRunner.getWebDriver().getCurrentUrl();
     }
@@ -59,6 +59,7 @@ public class BasePage {
         feedPage.waitForFeedPage();
         return feedPage;
     }
+
     @Step("Нажали на кнопку ЛК после логина")
     public AccountProfilePage clickPersonalAreaButtonAfterLogin() {
         buttonPersonalArea.click();

@@ -13,6 +13,7 @@ public class BaseRestClient {
      */
 
     public static final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
+
     protected RequestSpecification getBaseSpecRequest() {
         return new RequestSpecBuilder()
                 .addFilter(new AllureRestAssured())

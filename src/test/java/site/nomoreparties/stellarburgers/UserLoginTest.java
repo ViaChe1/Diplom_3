@@ -23,6 +23,7 @@ public class UserLoginTest {
     private UserClient userClient = new UserClient();
     private User user;
     private String bearerToken;
+
     @Before
     public void setUp() {
         // для запуска в Я.браузере
@@ -39,12 +40,14 @@ public class UserLoginTest {
         // Сохраняем его токен
         bearerToken = userRegister.extract().body().path("accessToken");
     }
+
     @After
     public void tearDown() {
         closeWebDriver();
         // Удаляем созданного для теста пользователя
         userClient.delete(bearerToken);
     }
+
     @DisplayName("Логин по кнопке Войти в аккаунт на главной")
     @Description("Проверяем, что попадаем на страницу логина по кнопке Войти в аккаунт на главной странице и можно" +
             "успешно залогиниться")
@@ -56,6 +59,7 @@ public class UserLoginTest {
         softAssertions.assertThat(homePage.isVisibleCreateOrderButton()).isTrue();
         softAssertions.assertAll();
     }
+
     @DisplayName("Логин через кнопку Личный кабинет")
     @Description("Проверяем, что попадаем на страницу логина через кнопку Личный кабинет в хедере и можно" +
             "успешно залогиниться")

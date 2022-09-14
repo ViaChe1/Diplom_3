@@ -52,16 +52,16 @@ public class LoginPage extends BasePage {
         return homePage;
     }
 
-    public boolean isVisibleEnterText(){
+    public boolean isVisibleEnterText() {
         return textEnter.shouldBe(visible).isDisplayed();
     }
 
-    public boolean isVisibleEnterButton(){
+    public boolean isVisibleEnterButton() {
         return buttonEnter.shouldBe(visible).isDisplayed();
     }
 
     @Step("Загрузка страницы логина")
-    public void waitForLoadLoginPage(){
+    public void waitForLoadLoginPage() {
         linkRecoverPassword.shouldBe(visible);
     }
 

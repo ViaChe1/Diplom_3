@@ -9,7 +9,7 @@ import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
-public class RegisterPage extends BasePage{
+public class RegisterPage extends BasePage {
 
     public static final String URL = "https://stellarburgers.nomoreparties.site/register";
 
@@ -57,7 +57,7 @@ public class RegisterPage extends BasePage{
         buttonRegistration.click();
     }
 
-    public boolean isVisibleTextWrongPassword(){
+    public boolean isVisibleTextWrongPassword() {
         return textWrongPassword.shouldBe(visible).isDisplayed();
     }
 

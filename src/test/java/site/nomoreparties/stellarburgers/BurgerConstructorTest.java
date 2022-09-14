@@ -13,6 +13,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class BurgerConstructorTest {
     private SoftAssertions softAssertions = new SoftAssertions();
+
     @Before
     public void setUp() {
         // для запуска в Я.браузере
@@ -22,10 +23,12 @@ public class BurgerConstructorTest {
 //        WebDriver driver = new ChromeDriver(options);
 //        WebDriverRunner.setWebDriver(driver);
     }
+
     @After
     public void tearDown() {
         closeWebDriver();
     }
+
     @DisplayName("Переходы по разделам конструктора")
     @Description("Проверяем, что работают переходы к разделам Булки, Соусы, Начинки во фрейме конструктора, по " +
             "нажатии на соответствующие названия разделов фрейма")

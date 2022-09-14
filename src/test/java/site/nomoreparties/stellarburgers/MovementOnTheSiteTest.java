@@ -13,6 +13,7 @@ import site.nomoreparties.stellarburgers.models.users.User;
 import site.nomoreparties.stellarburgers.pageobject.AccountProfilePage;
 import site.nomoreparties.stellarburgers.pageobject.HomePage;
 import site.nomoreparties.stellarburgers.pageobject.LoginPage;
+
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -21,6 +22,7 @@ public class MovementOnTheSiteTest {
     private UserClient userClient = new UserClient();
     private User user;
     private String bearerToken;
+
     @Before
     public void setUp() {
         // для запуска в Я.браузере
@@ -36,12 +38,14 @@ public class MovementOnTheSiteTest {
         // Сохраняем его токен
         bearerToken = userRegister.extract().body().path("accessToken");
     }
+
     @After
     public void tearDown() {
         closeWebDriver();
         // Удаляем созданного для теста пользователя
         userClient.delete(bearerToken);
     }
+
     @DisplayName("Переход в личный кабинет")
     @Description("Проверяем, что после логина при нажатии на Личный кабинет - переходим в личный кабинет")
     @Test
@@ -55,6 +59,7 @@ public class MovementOnTheSiteTest {
         softAssertions.assertThat(accountProfilePage.isVisibleAboutChapterText()).isTrue();
         softAssertions.assertAll();
     }
+
     @DisplayName("Переход в конструктор из ЛК")
     @Description("Проверяем, что из личного кабинета можно перейти в конструктор")
     @Test
@@ -69,6 +74,7 @@ public class MovementOnTheSiteTest {
         softAssertions.assertThat(homePage.isVisibleCollectBurgerText()).isTrue();
         softAssertions.assertAll();
     }
+
     @DisplayName("Клик по банеру из ЛК")
     @Description("Проверяем, что при клике по банеру из ЛК переходим на главную страницу")
     @Test
